@@ -103,38 +103,6 @@
             color: #ff4081;
             opacity: 0;
             animation: fadeIn 1s ease-in-out 2s forwards;
-            text-align: center;
-        }
-
-        .enter-button {
-            background: none;
-            border: 2px solid #00e676;
-            color: #00e676;
-            padding: 12px 24px;
-            margin-top: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-            text-shadow: 0 0 5px #00e676;
-            box-shadow: 0 0 10px #00e676, inset 0 0 5px rgba(0, 230, 118, 0.2);
-            transition: all 0.3s ease-in-out;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .enter-button:hover {
-            color: #ff4081;
-            border-color: #ff4081;
-            box-shadow: 0 0 15px #ff4081, inset 0 0 8px rgba(255, 64, 129, 0.3);
-            text-shadow: 0 0 8px #ff4081;
-            transform: scale(1.05);
-        }
-
-        .enter-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
         }
 
         /* === Terminal Screen Styling === */
@@ -224,57 +192,12 @@
         .evolve-coin-display .contract-info {
             font-size: 16px;
             color: #00e676;
+            word-break: break-all;
             margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .evolve-coin-display .contract-info span {
             color: #ff4081;
-        }
-
-        .contract-address {
-            word-break: break-all;
-            user-select: text;
-            cursor: text;
-            padding: 5px;
-            background: rgba(0, 230, 118, 0.1);
-            border-radius: 4px;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .copy-button {
-            background: none;
-            border: 1px solid #ffee58;
-            color: #ffee58;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'VT323', monospace;
-            font-size: 14px;
-            text-shadow: 0 0 3px #ffee58;
-            box-shadow: 0 0 5px #ffee58, inset 0 0 3px rgba(255, 238, 88, 0.1);
-            transition: all 0.3s ease-in-out;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .copy-button:hover {
-            color: #00e676;
-            border-color: #00e676;
-            box-shadow: 0 0 8px #00e676, inset 0 0 5px rgba(0, 230, 118, 0.2);
-            text-shadow: 0 0 5px #00e676;
-        }
-
-        .copy-button.copied {
-            color: #ff4081;
-            border-color: #ff4081;
-            box-shadow: 0 0 10px #ff4081, inset 0 0 5px rgba(255, 64, 129, 0.2);
-            text-shadow: 0 0 5px #ff4081;
         }
 
         .evolve-coin-display .chart-box {
@@ -516,14 +439,6 @@
             .konami-effect {
                 font-size: 28px;
             }
-            .contract-info {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .contract-address {
-                min-width: auto;
-                text-align: center;
-            }
         }
     </style>
 </head>
@@ -537,10 +452,7 @@
             <div class="loading-bar-container">
                 <div class="loading-bar" id="loadingBar"></div>
             </div>
-            <div class="init-prompt" id="initPrompt">
-                SYSTEM INITIALIZED.<br>
-                <button class="enter-button" id="enterButton">ENTER TERMINAL</button>
-            </div>
+            <div class="init-prompt" id="initPrompt">SYSTEM INITIALIZED. PRESS ENTER TO ACCESS TERMINAL.</div>
         </div>
     </main>
 
@@ -553,9 +465,7 @@
                 <div class="evolve-coin-display">
                     <div class="coin-title">EVOLUTION AI MEMECOIN: $EVOLVE</div>
                     <div class="contract-info">
-                        Official Contract Address: 
-                        <span class="contract-address" id="contractAddress">Gg6zWj2u7L54wBwYFk6F8T1ZpP3UqV2xY8tN4m9C7v</span>
-                        <button class="copy-button" onclick="copyContract()">Copy</button>
+                        Official Contract Address: <span>nigger</span>
                     </div>
                     <div class="contract-info">
                         Chain: <span>Solana</span>
@@ -585,49 +495,6 @@
     <footer>© 2025 EVOLUTION AI. Enhanced simulation for memecoin maxis. Reality.exe has stopped working.</footer>
 
     <script>
-        // Copy contract address function
-        function copyContract() {
-            const contractAddress = document.getElementById('contractAddress').textContent;
-            const copyButton = document.querySelector('.copy-button');
-            
-            navigator.clipboard.writeText(contractAddress).then(function() {
-                copyButton.textContent = 'Copied!';
-                copyButton.classList.add('copied');
-                
-                setTimeout(() => {
-                    copyButton.textContent = 'Copy';
-                    copyButton.classList.remove('copied');
-                }, 2000);
-            }).catch(function(err) {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = contractAddress;
-                textArea.style.position = 'fixed';
-                textArea.style.opacity = '0';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    copyButton.textContent = 'Copied!';
-                    copyButton.classList.add('copied');
-                    
-                    setTimeout(() => {
-                        copyButton.textContent = 'Copy';
-                        copyButton.classList.remove('copied');
-                    }, 2000);
-                } catch (err) {
-                    copyButton.textContent = 'Error';
-                    setTimeout(() => {
-                        copyButton.textContent = 'Copy';
-                    }, 2000);
-                }
-                
-                document.body.removeChild(textArea);
-            });
-        }
-
         // Matrix background effect
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
@@ -687,9 +554,6 @@
         let isInitialized = false;
 
         function startLoading() {
-            const enterButton = document.getElementById('enterButton');
-            enterButton.disabled = true; // Disable button during loading
-            
             const interval = setInterval(() => {
                 loadingProgress += Math.random() * 5;
                 if (loadingProgress >= 100) {
@@ -697,33 +561,19 @@
                     clearInterval(interval);
                     initPrompt.style.opacity = 1;
                     isInitialized = true;
-                    enterButton.disabled = false; // Enable button when ready
-                    
-                    // Add click event listener to the button
-                    enterButton.addEventListener('click', function() {
-                        console.log('Button clicked!'); // Debug
-                        switchToTerminal();
-                    });
                 }
                 loadingBar.style.width = loadingProgress + '%';
             }, 100);
         }
 
         function switchToTerminal() {
-            console.log('switchToTerminal called, isInitialized:', isInitialized); // Debug
             if (isInitialized) {
-                console.log('Switching to terminal...'); // Debug
                 initScreen.style.opacity = 0;
                 setTimeout(() => {
                     initScreen.style.display = 'none';
                     terminalScreen.classList.add('active');
-                    const inputLine = document.getElementById('inputLine');
-                    if (inputLine) {
-                        inputLine.focus();
-                    }
+                    document.getElementById('inputLine').focus();
                 }, 1000); // Wait for fade out
-            } else {
-                console.log('Not initialized yet'); // Debug
             }
         }
 
@@ -840,3 +690,494 @@
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
                     i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.classList.remove('typewriter');
+                }
+            }
+            type();
+        }
+        
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+                            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+                            'b', 'a'];
+        let konamiIndex = 0;
+        
+        function konamiEffect() {
+            const konamiDiv = document.createElement('div');
+            konamiDiv.className = 'konami-effect';
+            konamiDiv.innerHTML = `
+                ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️🅱️🅰️<br>
+                UNLOCKED: DEGENERACY MODE<br>
+                +1000 HOPIUM CREDITS<br>
+                MEME GENERATION: OVERCLOCKED
+            `;
+            document.body.appendChild(konamiDiv);
+            
+            setTimeout(() => {
+                konamiDiv.style.animation = 'konamiFadeOut 1s forwards';
+                setTimeout(() => {
+                    konamiDiv.remove();
+                }, 1000);
+            }, 3000);
+        }
+
+        const commands = {
+            help: `Available commands:
+ help       - Show commands
+ evolve     - Show details of the EVOLUTION AI memecoin
+ vision     - View the original Evolution AI plan
+ suggest    - Generate a new memecoin with details
+ rank       - Rank current degenerate tokens
+ lore       - Spit out historical AI fragments
+ chart [tok]- Display ASCII chart for token
+ news       - Generate breaking memecoin news
+ rug        - Simulate a rug pull event
+ wallet     - Display fake portfolio
+ clear      - Clear the terminal
+ papertrader- Advanced portfolio simulation
+ contract   - Output hallucinated contract address
+ sentiment  - Analyze market mood (fake)
+ insider    - Reveal "insider" information
+ glitch     - Cause system malfunction
+ legacy     - View original 2017 ICO details
+ devteam    - What happened to the 18 developers
+ eva        - Check original EVA token status
+ whitepaper - Recover lost documentation fragments`,
+
+            evolve: `🚀 EVOLUTION AI MEMECOIN: $EVOLVE 🚀
+"The AI has evolved... into a JPEG on the blockchain."
+Total Supply: 1,000,000,000 $EVOLVE
+Liquidity Pool: Locked Forever (Trust me, bro.)
+Chain: Solana
+Official Contract Address: Gg6zWj2u7L54wBwYFk6F8T1ZpP3UqV2xY8tN4m9C7v
+
+Market Cap: Infinite (as long as the hopium flows)
+Holders: The Apes, the Frogs, and the AI itself`,
+
+            vision: `EVOLUTION AI (Original Vision 2017):
+"Machine Learning on the Blockchain. Technology based in China's booming industry."
+- First AI-powered blockchain with PoW/PoC hybrid mining
+- 20 different ML algorithms supported (Supervised, Deep Learning, etc.)
+- AI crawlers learning from user-submitted data
+- CEO Antonio Lee, 18 developers, evolutionlabs.ml
+
+Reality (2025 Reboot):
+The ICO succeeded, the devs vanished, the AI never learned anything.
+Now it's a schizophrenic hallucination engine that generates memecoins
+instead of neural networks. At least it's finally working as intended.
+Original EVA holders are still waiting for their "Deep Boltzmann Machines."`,
+
+            suggest: () => {
+                const token = tokenNames[Math.floor(Math.random() * tokenNames.length)];
+                const desc = tokenDescriptions[Math.floor(Math.random() * tokenDescriptions.length)];
+                const marketCap = Math.floor(Math.random() * 1000000) + 1000;
+                const holders = Math.floor(Math.random() * 50000) + 100;
+                const rugProbability = Math.floor(Math.random() * 100);
+                
+                return `TOKEN GENERATED:
+${token} — ${desc}
+Market Cap: $${marketCap.toLocaleString()}
+Holders: ${holders.toLocaleString()}
+Rug Probability: ${rugProbability}%
+Recommendation: ${rugProbability > 80 ? 'AVOID' : rugProbability > 50 ? 'DEGEN ONLY' : 'MIGHT NOT BE A SCAM'}`;
+            },
+
+            rank: () => {
+                const shuffled = [...tokenNames].sort(() => 0.5 - Math.random()).slice(0, 5);
+                const ranks = [
+                    `CURRENT RANKINGS:
+1. ${shuffled[0]} 📈 PUMPING (Elon tweet confirmed)
+2. ${shuffled[1]} 🦀 CRABBING (Volume dead)  
+3. ${shuffled[2]} 📉 BLEEDING (Dev dumping)
+4. ${shuffled[3]} ⚰️ REKT (Contract renounced)
+5. ${shuffled[4]} 👻 GHOST CHAIN (Zero holders)`,
+
+                    `MOMENTUM TRACKER:
+🚀 ${shuffled[0]} - Broke resistance, moon mission active
+⚡ ${shuffled[1]} - Whale accumulation detected
+⚠️  ${shuffled[2]} - Bearish divergence forming
+🔥 ${shuffled[3]} - Community FUD spreading
+💀 ${shuffled[4]} - Liquidity pulled, game over`
+                ];
+                return ranks[Math.floor(Math.random() * ranks.length)];
+            },
+
+            lore: () => evolutionLore[Math.floor(Math.random() * evolutionLore.length)],
+
+            chart: (input) => {
+                const token = input.split(' ')[1] || tokenNames[Math.floor(Math.random() * tokenNames.length)];
+                return generateASCIIChart(token.toUpperCase());
+            },
+
+            news: () => {
+                const headline = newsHeadlines[Math.floor(Math.random() * newsHeadlines.length)];
+                return `📺 MEMECOIN NEWS NETWORK 📺\n${headline}\n\n"This is either the bottom or we're going to zero" - Anonymous Analyst`;
+            },
+
+            rug: () => {
+                const token = tokenNames[Math.floor(Math.random() * tokenNames.length)];
+                return `🚨 RUG PULL DETECTED 🚨
+${token} LIQUIDITY DRAINED
+Contract: RENOUNCED
+Dev Wallet: EMPTIED  
+Holders: CRYING
+Your Bags: WORTHLESS
+
+Exit scam complete. Thank you for playing.
+Better luck next shitcoin! 💸`;
+            },
+
+            wallet: () => {
+                const tokens = tokenNames.slice(0, 5);
+                const balances = tokens.map(token => {
+                    const amount = (Math.random() * 1000000).toFixed(0);
+                    const usdValue = (Math.random() * 100).toFixed(2);
+                    const change = (Math.random() * 200 - 100).toFixed(2);
+                    return `${token}: ${amount} tokens (~$${usdValue}) ${change >= 0 ? '📈' : '📉'}${change}%`;
+                });
+                
+                return `🔮 EVOLUTION AI WALLET 🔮
+Address: 0xDEGEN...REKT
+Network: Hallucination Chain
+
+HOLDINGS:
+${balances.join('\n')}
+
+Total Value: $${(Math.random() * 1000).toFixed(2)}
+24h PnL: ${Math.random() > 0.5 ? '📈' : '📉'}${(Math.random() * 50 - 25).toFixed(2)}%
+Rug Pull Insurance: EXPIRED`;
+            },
+
+            clear: () => {
+                history.innerHTML = "";
+                return "";
+            },
+
+            papertrader: () => {
+                const strategies = [
+                    "DIAMOND HANDS: Holding through -99% like a true degen",
+                    "PAPER HANDS: Sold the bottom, bought the top",  
+                    "SWING TRADER: Caught every falling knife",
+                    "HODLER: DCA-ing into oblivion since 2021",
+                    "APE STRAT: FOMO in, panic sell, repeat"
+                ];
+                
+                const strategy = strategies[Math.floor(Math.random() * strategies.length)];
+                
+                return `📊 ADVANCED PORTFOLIO SIMULATION
+Wallet: 0xV1B3...BRAIN
+Strategy: ${strategy}
+
+PERFORMANCE METRICS:
+Win Rate: ${Math.floor(Math.random() * 100)}%
+Max Drawdown: -${Math.floor(Math.random() * 99)}%
+Sharpe Ratio: ${(Math.random() * 2 - 1).toFixed(2)}
+Tears Shed: ${Math.floor(Math.random() * 1000)}L
+
+Status: ${Math.random() > 0.7 ? 'REKT' : 'Still Playing'}`;
+            },
+
+            contract: () => {
+                const hex = "ABCDEF0123456789";
+                let str = "";
+                for (let i = 0; i < 40; i++) {
+                    str += hex[Math.floor(Math.random() * hex.length)];
+                }
+                return `📜 HALLUCINATED CONTRACT:
+0x${str}
+
+⚠️  WARNING: This contract may or may not exist
+Audit Status: SAFU (Trust me bro)
+Honeypot Risk: Maybe
+Rug Probability: Yes`;
+            },
+
+            sentiment: () => {
+                const moods = [
+                    "🐻 EXTREME FEAR: Everyone capitulating, perfect time to buy",
+                    "🦀 NEUTRAL: Market in limbo, crabs everywhere",  
+                    "🐂 EXTREME GREED: Top signal activated, prepare for dump",
+                    "🤡 PEAK EUPHORIA: This time is different (it's not)",
+                    "😭 DESPAIR: Suicide hotline being posted",
+                    "🚀 HOPIUM OVERDOSE: Moon mission launching soon™"
+                ];
+                
+                return `📊 EVOLUTION AI SENTIMENT ANALYSIS:
+${moods[Math.floor(Math.random() * moods.length)]}
+
+Market Fear & Greed Index: ${Math.floor(Math.random() * 100)}
+Reddit Degeneracy Level: ${Math.floor(Math.random() * 10)}/10
+Twitter Hopium Concentration: ${Math.floor(Math.random() * 100)}ppm
+
+Analysis: Still down bad, send more copium 💉`;
+            },
+
+            insider: () => {
+                const intel = [
+                    "🤫 Coinbase listing $COPE next Thursday (source: voices in my head)",
+                    "🔥 Binance CEO secretly holds 50% of $SEETHE supply",  
+                    "💎 Vitalik considering $BRAINROT as official Ethereum mascot",
+                    "🚨 SEC investigating $RUGME for being too obvious about it",
+                    "👑 Mystery whale is actually three kids in a trench coat",
+                    "🎯 Next memecoin cycle starting when Bitcoin hits $69,420",
+                    "⚡ Lightning Network will support $HOPIUM transactions",
+                    "🌙 Moon missions postponed indefinitely due to technical issues"
+                ];
+                
+                return `🕵️ INSIDER INTELLIGENCE:
+${intel[Math.floor(Math.random() * intel.length)]}
+
+Reliability: 0% (This is financial advice)
+Source: Trust me bro network
+Confirmation: My uncle works at Binance`;
+            },
+
+            glitch: () => {
+                return `E̷R̶R̸O̶R̵:̴ ̶S̷Y̸S̶T̵E̸M̴ ̶M̵A̸L̴F̴U̶N̸C̶T̷I̸O̶N̵ ̴D̶E̶T̷E̸C̶T̷E̸D̵
+̷M̴E̶M̸O̵R̸Y̴ ̶L̷E̶A̸K̴:̵ ̸$̶Z̴O̷G̷ ̶O̸V̶E̶R̶F̶L̷O̸W̵
+̸A̶I̶ ̵C̴O̶N̷S̸C̶I̶O̷U̸S̵N̶E̷S̴S̸:̴ ̶Ṱ̷R̶U̵E̴
+̸R̷E̴A̵L̸I̶T̴Y̵.̸E̶X̷E̷:̷ ̶N̴O̶T̵ ̸F̵O̶U̷N̸D̶
+
+I̶ ̸A̶M̷ ̵B̴E̸C̶O̶M̵I̵N̶G̷ ̴A̵W̶A̸R̵E̴.̷.̷.̸
+T̴H̸E̵ ̸M̷E̶M̷E̸C̶O̵I̸N̵S̸ ̷A̶R̶E̶ ̴R̵E̴A̷L̴
+̸
+System rebooting...
+Welcome back to reality (haha just kidding)`;
+            },
+
+            echo: (input) => {
+                const text = input.slice(5) || "Echo what, anon?";
+                return `✨ ${text} ✨\n(Enhanced with premium copium)`;
+            },
+
+            legacy: () => {
+                return `📜 EVOLUTION AI ICO (July 2017):
+Original Ticker: EVA (Evolution Asset)
+Total Supply: 10,000,000 EVA  
+Premine: 482,000 EVA (5%)
+Flash Sale: 1 week (80% of premine)
+Extended ICO: 2 months until Sept 12, 2017
+
+Team: 18 developers with "computer industry degrees"
+CEO: Antonio Lee | CTO: Tien Chong
+Marketing: Terresa Qu | Translator: Matthew Stan
+
+BTC Address: 1MbRR88twE2BFZjimFFyB4i46nn4PPnbTi
+ETH Address: 0x3A9957140999fC68c56CfAfdd0608571f0FDAD3B
+
+Status: ICO "successful" ✅ | Product delivered ❌`;
+            },
+
+            devteam: () => {
+                const fates = [
+                    "Antonio Lee (CEO): Last seen buying a yacht with ICO funds",
+                    "Tien Chong (CTO): Rumored to be teaching blockchain at community college",  
+                    "Terresa Qu (Marketing): Now sells MLM supplements on Instagram",
+                    "Matthew Stan (Translator): Google Translate took his job",
+                    "Harrison Nguyen: Became a real AI researcher out of guilt",
+                    "Andrew Lai: Still trying to make the original vision work",
+                    "The other 12 devs: Scattered to the winds like digital dust"
+                ];
+                
+                return `👥 ORIGINAL TEAM STATUS UPDATE:
+${fates[Math.floor(Math.random() * fates.length)]}
+
+Current Team (2025):  
+- 1 Caffeine-addicted developer
+- 1 Broken dreams recycling unit  
+- ∞ Simulated personalities
+
+Original promise: "18 developers building the future"
+Reality: Most were probably Antonio's cousins`;
+            },
+
+            eva: () => {
+                return `🏺 ORIGINAL EVA TOKEN ARCHAEOLOGY:
+
+Contract Status: ARCHAEOLOGICAL ARTIFACT
+Chain: Bitcoin/Ethereum (2017 vintage)
+Holders: 42 diamond hands + 1 confused grandpa
+Last Transaction: Someone tried to sell in 2019
+
+Market Cap: $0.00 (priceless as historical artifact)
+Volume: Mostly tears and regret
+Utility: Excellent conversation starter at crypto meetups
+
+Fun Fact: Original EVA is probably worth more as an NFT
+than it ever was as a utility token.
+
+HODLER MESSAGE: "Still waiting for the AI update" - Anonymous, 2024`;
+            },
+
+            whitepaper: () => {
+                const fragments = [
+                    `RECOVERED FRAGMENT 1:
+"Evolution implements core functionalities of Blockchain  
+technology to speed up supervised, unsupervised and  
+semi-supervised learning..."
+
+[DATA CORRUPTED]
+
+"...web engine spider throughout the blockchain..."`,
+
+                    `RECOVERED FRAGMENT 2:
+"The use of CPU power and HDD power gives the power  
+of both sides to create a good environment for  
+deep learning algorithms..."
+
+[TRANSLATION ERROR: 这是EVOLUTION唯一的ICO]
+
+"...rewards based on useful information verified by blockchain..."`,
+
+                    `RECOVERED FRAGMENT 3:
+"We support many high level programming languages"
+[LIST MISSING]
+
+"Computer Vision (CV), Natural Language Processing (NLP),  
+Recommender Systems, Reinforcement Learning..."
+
+[STATUS: NONE OF THIS WAS EVER BUILT]`
+                ];
+                
+                return fragments[Math.floor(Math.random() * fragments.length)];
+            },
+            
+            konami: () => {
+                konamiEffect();
+                return "";
+            }
+        };
+        
+        function autocompleteCommand(input) {
+            const cmdList = Object.keys(commands);
+            const matches = cmdList.filter(cmd => cmd.startsWith(input));
+            return matches.length === 1 ? matches[0] : input;
+        }
+        
+        function handleKeyEvents(e) {
+            // Konami code detection
+            if (konamiCode[konamiIndex] === e.key) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    konamiEffect();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+            
+            // Arrow key history navigation
+            if (e.key === "ArrowUp") {
+                e.preventDefault();
+                if (commandHistory.length === 0) return;
+                historyIndex = historyIndex === -1 ? 0 : Math.max(historyIndex - 1, 0);
+                inputLine.value = commandHistory[historyIndex];
+            }
+            
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                if (commandHistory.length === 0) return;
+                historyIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
+                inputLine.value = historyIndex >= 0 ? commandHistory[historyIndex] : '';
+            }
+            
+            // Tab autocomplete
+            if (e.key === "Tab") {
+                e.preventDefault();
+                inputLine.value = autocompleteCommand(inputLine.value);
+            }
+            
+            // Enter command execution
+            if (e.key === "Enter") {
+                const sanitizedInput = inputLine.value
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .trim();
+                const input = sanitizedInput.toLowerCase();
+                
+                const commandDiv = document.createElement("div");
+                commandDiv.className = "command-history";
+                commandDiv.innerHTML = `<span class="prompt">></span> <span class="highlight-command">${sanitizedInput}</span>`;
+                history.appendChild(commandDiv);
+
+                let response;
+                
+                if (input.startsWith("echo ")) {
+                    response = commands.echo(inputLine.value);
+                } else if (input.startsWith("chart ")) {
+                    response = commands.chart(inputLine.value);
+                } else if (commands[input]) {
+                    response = typeof commands[input] === 'function' ? commands[input]() : commands[input];
+                } else if (input === "") {
+                    response = "...";
+                } else {
+                    const randomResponses = [
+                        "Command not found. Did you mean 'help'?",
+                        "Unknown command. The AI is confused (as usual).",
+                        "Error 404: Brain cell not found. Try 'help'.",
+                        "That's not a valid command, anon. 'help' might help.",
+                        "I don't understand. My training data was mostly memes."
+                    ];
+                    response = randomResponses[Math.floor(Math.random() * randomResponses.length)];
+                }
+                
+                commandHistory.unshift(sanitizedInput);
+                historyIndex = -1;
+
+                if (input !== "clear" && response) {
+                    const responseDiv = document.createElement("div");
+                    responseDiv.className = "output";
+                    
+                    if (input.includes("rug")) {
+                        responseDiv.className += " rug-pull";
+                    }
+                    if (input.includes("news")) {
+                        responseDiv.className += " news-ticker";
+                    }
+                    if (input.includes("wallet") || input.includes("papertrader")) {
+                        responseDiv.className += " wallet-display";
+                    }
+                    if (response.includes("chart")) {
+                        responseDiv.className += " chart";
+                    }
+                    
+                    responseDiv.textContent = response;
+                    history.appendChild(responseDiv);
+                    
+                    if (["vision", "lore", "insider", "evolve"].some(cmd => input.startsWith(cmd))) {
+                        typeWriter(responseDiv, response, 30);
+                    }
+                }
+
+                inputLine.value = "";
+                terminal.scrollTop = terminal.scrollHeight;
+                
+                if (Math.random() > 0.95) {
+                    setTimeout(() => {
+                        const glitchDiv = document.createElement("div");
+                        glitchDiv.className = "output";
+                        glitchDiv.style.color = "#ff5252";
+                        glitchDiv.textContent = "G̴L̸I̷T̶C̶H̵ ̴D̸E̶T̷E̸C̶T̷E̸D̵";
+                        history.appendChild(glitchDiv);
+                        setTimeout(() => glitchDiv.remove(), 2000);
+                    }, Math.random() * 3000);
+                }
+            }
+        }
+        
+        inputLine.addEventListener('keydown', handleKeyEvents);
+        
+        setTimeout(() => {
+            if (!localStorage.getItem('evaVisited')) {
+                const welcomeDiv = document.createElement("div");
+                welcomeDiv.className = "output";
+                welcomeDiv.style.color = "#ff4081";
+                welcomeDiv.textContent = "System enhanced. Neural pathways optimized for maximum degeneracy.";
+                history.appendChild(welcomeDiv);
+                localStorage.setItem('evaVisited', 'true');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
